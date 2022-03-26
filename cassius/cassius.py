@@ -51,7 +51,7 @@ class Analysis:
             if key in string.ascii_uppercase:
                 self.ciphertext_characters[key.lower()] += self.ciphertext_characters[key]
 
-    def __unigram_percentages(self, include_nonletters=False):
+    def __calculate_unigram_percentages(self, include_nonletters=False):
         if include_nonletters:
             for key in self.ciphertext_characters.keys:
                 self.ciphertext_character_percents[key] = (self.ciphertext_characters[key] / self.ciphertext_length) * 100
@@ -95,7 +95,7 @@ class Analysis:
 
 
         # Do unigram percentage analysis
-        self.__unigram_percentages()
+        self.__calculate_unigram_percentages()
 
         if not silent:
             print("percentage analysis successful")
