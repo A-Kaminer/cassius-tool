@@ -5,12 +5,16 @@ Documentation for the main analysis class of Cassius
 `self.analyze\_unigrams(include\_nonletters=False, ignore\_capitals=True, silent=False)`  
 Analyze the unigrams, or single letters in the the ciphertext.
 #### Arguments
- * include\_nonletters=False
-    Type: boolean
-    Efffect: determines whether or not to pay attention to nonletter characters
- * ignore\_capitals=True
-    Type: boolean
-    Effect determines whether or not to be case sensitive on capitals
- * silent=False
-    Type: boolean
-    Effect: determines whether or not to print logging output
+ * include\_nonletters=False  
+    Type: boolean  
+    Efffect: determines whether or not to pay attention to nonletter characters  
+ * ignore\_capitals=True  
+    Type: boolean  
+    Effect determines whether or not to be case sensitive on capitals  
+ * silent=False  
+    Type: boolean  
+    Effect: determines whether or not to print logging output  
+---
+`self.__eliminate_capitals(self)`
+#### Arguments
+ * self
