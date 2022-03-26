@@ -23,6 +23,3 @@ Analyze the unigrams, or single letters in the the ciphertext.
  * sets `self.ciphertext_characters`
  * sets `self.ciphertext_character_percents`
 ---
-`self.__eliminate_capitals(self)`
-#### Arguments
- * self
