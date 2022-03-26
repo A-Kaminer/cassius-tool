@@ -1,1 +1,0 @@
-Need to think seriously about how I'm going to lay out data. I'm not going to have seperate lists for characters and letters. I'm going to do everything or just the letters based on the parameter. Not keeping track of both data.
