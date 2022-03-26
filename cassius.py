@@ -28,10 +28,10 @@ class Analysis:
         """Parse all characters in the text."""
 
         for char in self.ciphertext:
-            if char in self.ciphertext_letters:
-                self.ciphertext_letters[char] += 1
+            if char in self.ciphertext_characters:
+                self.ciphertext_characters[char] += 1
             else:
-                self.ciphertext_letters[char] = 0
+                self.ciphertext_characters[char] = 0
 
     def __analyze_unigrams_letters_only(self):
         """Parse only the letters in the text."""
@@ -39,19 +39,23 @@ class Analysis:
         parsed_ciphertext = [ letter for letter in self.ciphertext if letter in string.ascii_letters ]
 
         for char in parsed_ciphertext:
-            if char in self.ciphertext_letters:
-                self.ciphertext_letters[char] += 1
+            if char in self.ciphertext_characters:
+                self.ciphertext_characters[char] += 1
             else:
-                self.ciphertext_letters[char] = 0
+                self.ciphertext_characters[char] = 0
 
     def __eliminate_capitals(self):        # Update the character list and letter list
         for key in self.ciphertext_characters:
             if key in string.ascii_uppercase:
                 self.ciphertext_characters[key.lower()] += self.ciphertext_characters[key]
-                self.ciphertext_letters[keys.lower()] += self.ciphertext_letters[key]
 
-    def __unigram_percentage_analysis(self):
-        
+    def __unigram_percentages(self, include_nonletters=False):
+        if include_nonletters:
+            for key in self.ciphertext_characters.keys:
+                self.ciphertext_character_percents[key] = (self.ciphertext_characters[key] / self.ciphertext_length) * 100
+        else:
+            for key in self.ciphertext_characters.keys:
+                self.ciphertext_characters_percents[key] = (self.ciphertext_characters[key] / self.num_ciphertext_letters) * 100
     
     def __parse_language_file(self, file):
         # Parse a language file
@@ -71,10 +75,8 @@ class Analysis:
         """Parse the ciphertext."""
 
         # Clear the dictionaries
-        self.ciphertext_letters = {}
         self.ciphertext_characters = {}
         self.ciphertext_character_percents = {}
-        self.ciphertext_letter_percents = {}
         
         # Get numbers and percents
         if include_nonletters:
@@ -91,7 +93,7 @@ class Analysis:
 
 
         # Do unigram percentage analysis
-        self.__unigram_percentage_analysis()
+        self.__unigram_percentages()
 
         if not silent:
             print("percentage analysis successful")
