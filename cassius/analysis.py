@@ -1,6 +1,7 @@
 import string
 import pathlib
 import os
+from cassius.utilities import Util
 
 class Analysis:
     """Class to do analysis on a ciphertext."""
@@ -19,7 +20,7 @@ class Analysis:
         self.num_ciphertext_letters = len(letters)
 
         # Get language stats
-        self.__parse_language_file("language-frequencies/en_u_frequencies.txt")
+        self.en_unigram_frequencies = self.__parse_language_file("language/en_u_frequencies.txt")
 
 
     # Private methods start
@@ -53,21 +54,14 @@ class Analysis:
 
     def __calculate_unigram_percentages(self, include_nonletters=False):
         if include_nonletters:
-            for key in self.ciphertext_characters.keys:
-                self.ciphertext_character_percents[key] = (self.ciphertext_characters[key] / self.ciphertext_length) * 100
+            for key in self.ciphertext_characters.keys():
+                self.ciphertext_character_percents[key] = round((self.ciphertext_characters[key] / self.ciphertext_length) * 100, 1)
         else:
-            for key in self.ciphertext_characters.keys:
-                self.ciphertext_characters_percents[key] = (self.ciphertext_characters[key] / self.num_ciphertext_letters) * 100
+            for key in self.ciphertext_characters.keys():
+                self.ciphertext_character_percents[key] = round((self.ciphertext_characters[key] / self.num_ciphertext_letters) * 100, 1)
     
     def __parse_language_file(self, file):
-        # Parse a language file
-        self.en_unigram_frequencies = {}
-
-        with open(os.fspath(pathlib.Path(__file__).parent.parent.resolve()) + f"/{file}", "r") as lang:
-            for line in lang.readlines():
-                parts = line.split(":")
-                self.en_unigram_frequencies[parts[0]] = parts[1][:-1]
-
+        return Util.parse_file_dictionary(file)
 
     # Private methods end
     ############################################################################
@@ -91,24 +85,12 @@ class Analysis:
         
 
         if not silent:
-            print("Data parsing successful")
+            print("Data parsing successful.")
 
 
         # Do unigram percentage analysis
         self.__calculate_unigram_percentages()
 
         if not silent:
-            print("percentage analysis successful")
+            print("Percentage analysis successful.")
 
-
-
-
-
-
-class Output:
-    """Class to deal with the output of the Analysis class. All methods are 
-    static and take an Analysis object."""
-
-    @staticmethod
-    def print_character_percentages(obj):
-        pass
