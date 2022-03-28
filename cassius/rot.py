@@ -42,7 +42,7 @@ class RotCiphers:
     def rot_brute_force(self, analysis_object, preserve_caps=False, silent=False):
         probable = []
 
-        common_words = Util.parse_file_array("language/en_common_words.txt")
+        common_words = Util.parse_file_array(f"language/{analysis_object.language}_common_words.txt")
             # do do each possible rot.
         for i in range(26):
             r = RotCiphers.rot(analysis_object, i, preserve_caps)

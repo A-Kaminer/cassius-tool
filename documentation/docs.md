@@ -9,3 +9,7 @@ This is the table of contents for the docs.
 
  * Testing
     * [General Tests](general_testing.md)
+
+ * Languages
+    * English (Default) - en
+    * More to come.

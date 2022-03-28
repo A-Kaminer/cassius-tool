@@ -6,21 +6,21 @@ from cassius.utilities import Util
 class Analysis:
     """Class to do analysis on a ciphertext."""
     
-    def __init__(self, ciphertext):
+    def __init__(self, ciphertext, language="en"):
         """Do a first pass of the ciphertext. Get the actual ciphertext, the 
         length, and the length without characters. Get the letter frequencies in
-        english."""
-
+        specified language."""
 
         # Get various useful stats about the ciphertext
         self.ciphertext = ciphertext
         self.ciphertext_length = len(ciphertext)
+        self.language = language
 
         letters = [ letter for letter in ciphertext if letter in string.ascii_letters ]
         self.num_ciphertext_letters = len(letters)
 
         # Get language stats
-        self.en_unigram_frequencies = self.__parse_language_file("language/en_u_frequencies.txt")
+        self.unigram_frequencies = self.__parse_language_file(f"language/{self.language}_u_frequencies.txt")
 
 
     # Private methods start
