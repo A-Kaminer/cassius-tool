@@ -1,12 +1,13 @@
 import string
 import pathlib
 import os
+import primefac
 from cassius.utilities import Util
 
 class Analysis:
     """Class to do analysis on a ciphertext."""
     
-    def __init__(self, ciphertext, language="en"):
+    def __init__(self, ciphertext, language="en", cipher_type="unknown"):
         """Do a first pass of the ciphertext. Get the actual ciphertext, the 
         length, and the length without characters. Get the letter frequencies in
         specified language."""
@@ -15,12 +16,16 @@ class Analysis:
         self.ciphertext = ciphertext
         self.ciphertext_length = len(ciphertext)
         self.language = language
+        self.cipher_type = cipher_type
+        
+        if cipher_type == "static_substitution" or cipher_type == "dynamic_substitution":
+            letters = [ letter for letter in ciphertext if letter in string.ascii_letters ]
+            self.num_ciphertext_letters = len(letters)
 
-        letters = [ letter for letter in ciphertext if letter in string.ascii_letters ]
-        self.num_ciphertext_letters = len(letters)
+            # Get language stats
 
-        # Get language stats
-        self.unigram_frequencies = self.__parse_language_file(f"language/{self.language}_u_frequencies.txt")
+            self.unigram_frequencies = self.__parse_language_file(f"language/{self.language}_u_frequencies.txt")
+
 
 
     # Private methods start
@@ -63,6 +68,9 @@ class Analysis:
     def __parse_language_file(self, file):
         return Util.parse_file_dictionary(file)
 
+    def __approximate_block_length(self):
+
+
     # Private methods end
     ############################################################################
 
@@ -93,4 +101,3 @@ class Analysis:
 
         if not silent:
             print("Percentage analysis successful.")
-

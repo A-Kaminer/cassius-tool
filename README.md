@@ -2,7 +2,7 @@
 Do you need a streamlined way to do frequency analysis? Cassius provides graphical and commandline interfaces, with all of the information you could ever need.
 
 ## Dependencies
- * Pygame
+ * pygame (pip)
  * Python 3.6 or greater (ideally the most recent version)
  * Bash
 
